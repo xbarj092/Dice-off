@@ -1,3 +1,5 @@
+using System;
+
 public class SceneLoadManager : MonoSingleton<SceneLoadManager>
 {
     protected override void Init()
@@ -45,5 +47,10 @@ public class SceneLoadManager : MonoSingleton<SceneLoadManager>
     public bool IsSceneLoaded(SceneLoader.Scenes sceneToCheck)
     {
         return SceneLoader.IsSceneLoaded(sceneToCheck);
+    }
+
+    public void RestartGame()
+    {
+        SceneLoader.LoadScene(SceneLoader.Scenes.GameScene, toUnload: SceneLoader.Scenes.GameScene);
     }
 }
