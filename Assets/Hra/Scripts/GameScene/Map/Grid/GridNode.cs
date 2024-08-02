@@ -10,6 +10,8 @@ public class GridNode
 
     public bool IsVisited;
 
+    public Dice Dice;
+
     public GridNode CameFromNode;
     public int DistanceFromStart;
 
