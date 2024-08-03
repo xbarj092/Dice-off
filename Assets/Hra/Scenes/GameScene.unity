@@ -338,7 +338,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6488720604210407467, guid: 84a532dc06f455949ae8c6c4dd51e481, type: 3}
       propertyPath: m_Name
-      value: MapGenerator
+      value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 8950703904853812779, guid: 84a532dc06f455949ae8c6c4dd51e481, type: 3}
       propertyPath: m_LocalPosition.x
@@ -454,6 +454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5916964107020034203, guid: acb557ed6898bd049ac54a9ddc27aec9, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 672809314}
     - target: {fileID: 9222769947176581561, guid: acb557ed6898bd049ac54a9ddc27aec9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
