@@ -14,10 +14,6 @@ public class MapGenerator : MonoBehaviour
     private void Awake()
     {
         _grid = new(GRID_WIDTH, GRID_HEIGHT, 1, (Grid<GridNode> g, int x, int y) => new GridNode(g, x, y));
-    }
-
-    private void Start()
-    {
         _diceSpawner.Spawn(_grid, _dicePrefab);
     }
 }

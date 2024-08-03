@@ -23,7 +23,7 @@ public class DiceSpawner
     {
         GridNode gridNode = _grid.GetGridObject(x, y);
         Dice dice = Object.Instantiate(dicePrefab, _grid.GetWorldPosition(x, y), Quaternion.identity);
-        int randomValue = Random.Range(0, 7);
+        int randomValue = Random.Range(1, 7);
         dice.Init(x, y, randomValue);
         gridNode.Dice = dice;
         _grid.SetGridObject(x, y, gridNode);
