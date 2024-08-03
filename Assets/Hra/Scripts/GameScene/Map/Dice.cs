@@ -12,6 +12,14 @@ public class Dice : MonoBehaviour
 
     private int _value;
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void Init(int x, int y, int randomValue)
     {
         Coordinates = new(x, y);
@@ -20,20 +28,17 @@ public class Dice : MonoBehaviour
         SetValue();
     }
 
-    public void DecreaseValue(bool isPlayerOnDice = false)
+    public void DecreaseValue(int value)
     {
-        _value--;
+        _value -= value;
         if (_value <= 0)
         {
             _rigidbody.useGravity = true;
-            if (isPlayerOnDice)
+            foreach (PlayerInput player in GameManager.Instance.Players)
             {
-                foreach (PlayerInput player in GameManager.Instance.Players)
+                if (player.GridNode.Dice == this)
                 {
-                    if (player.GridNode.Dice == this)
-                    {
-                        player.Rigidbody.useGravity = true;
-                    }
+                    player.Rigidbody.useGravity = true;
                 }
             }
         }

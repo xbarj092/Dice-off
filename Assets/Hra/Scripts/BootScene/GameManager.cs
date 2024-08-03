@@ -3,5 +3,6 @@ using System.Collections.Generic;
 public class GameManager : MonoSingleton<GameManager>
 {
     public List<PlayerInput> Players = new();
-    public int PlayerIndexPlaying = 1;
+    public int PlayerIndexPlaying = 0;
+    public int NextDamageValue;
 }
