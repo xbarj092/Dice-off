@@ -1,9 +1,11 @@
 using AYellowpaper.SerializedCollections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Dice : MonoBehaviour
 {
+    [SerializeField] private DiceAnimator _animator;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private List<GameObject> _dots = new();
     [SerializeField] private SerializedDictionary<int, List<GameObject>> _combinations = new(); 
@@ -33,18 +35,25 @@ public class Dice : MonoBehaviour
         Value -= value;
         if (Value <= 0)
         {
-            _rigidbody.useGravity = true;
-            foreach (PlayerInput player in GameManager.Instance.Players)
-            {
-                if (player.GridNode.Dice == this)
-                {
-                    player.Rigidbody.useGravity = true;
-                }
-            }
+            StartCoroutine(Fall());
         }
         else
         {
             SetValue();
+        }
+    }
+
+    private IEnumerator Fall()
+    {
+        _animator.PlayAnimation(DiceAnimations.Fall);
+        yield return new WaitForSeconds(1);
+        _rigidbody.useGravity = true;
+        foreach (PlayerInput player in GameManager.Instance.Players)
+        {
+            if (player.GridNode.Dice == this)
+            {
+                player.Rigidbody.useGravity = true;
+            }
         }
     }
 
