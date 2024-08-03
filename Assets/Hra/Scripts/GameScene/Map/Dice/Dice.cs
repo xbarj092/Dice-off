@@ -6,6 +6,7 @@ using UnityEngine;
 public class Dice : MonoBehaviour
 {
     [SerializeField] private DiceAnimator _animator;
+    [SerializeField] private DiceEffectPlayer _effectPlayer;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private List<GameObject> _dots = new();
     [SerializeField] private SerializedDictionary<int, List<GameObject>> _combinations = new(); 
@@ -46,6 +47,7 @@ public class Dice : MonoBehaviour
     private IEnumerator Fall()
     {
         _animator.PlayAnimation(DiceAnimations.Fall);
+        _effectPlayer.PlayFallFX();
         yield return new WaitForSeconds(1);
         _rigidbody.useGravity = true;
         foreach (PlayerInput player in GameManager.Instance.Players)
