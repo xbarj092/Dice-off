@@ -23,18 +23,14 @@ public class Grid<TGridObject>
                 if (createGridObject != null)
                 {
                     _gridArray[x, y] = createGridObject(this, x, y);
-                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.red, 100);
-                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.red, 100);
                 }
             }
-            Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.red, 100);
-            Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.red, 100);
         }
     }
 
     public Vector3 GetWorldPosition(int x, int y)
     {
-        return new Vector3(x, y, 0) * _cellSize;
+        return new Vector3(x, 0, y) * _cellSize;
     }
 
     public void GetXY(Vector3 worldPosition, out int x, out int y)
