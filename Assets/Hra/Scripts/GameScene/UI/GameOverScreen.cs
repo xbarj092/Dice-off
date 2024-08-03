@@ -18,7 +18,6 @@ public class GameOverScreen : GameScreen
     public void ContinueGame()
     {
         SceneLoadManager.Instance.RestartGame();
-        Debug.Log($"ContinueGame");
     }
 
     public void ReturnToMenu()
