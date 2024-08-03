@@ -34,7 +34,7 @@ public class Grid<TGridObject>
 
     public Vector3 GetWorldPosition(int x, int y)
     {
-        return new Vector3(x, y, 0) * _cellSize;
+        return new Vector3(x, 0, y) * _cellSize;
     }
 
     public void GetXY(Vector3 worldPosition, out int x, out int y)

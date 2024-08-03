@@ -21,10 +21,10 @@ public class DiceSpawner
 
     private void PlaceDice(int x, int y, Dice dicePrefab)
     {
-        Dice dice = Object.Instantiate(dicePrefab);
+        GridNode gridNode = _grid.GetGridObject(x, y);
+        Dice dice = Object.Instantiate(dicePrefab, _grid.GetWorldPosition(x, y), Quaternion.identity);
         int randomValue = Random.Range(0, 7);
         dice.Init(x, y, randomValue);
-        GridNode gridNode = _grid.GetGridObject(x, y);
         gridNode.Dice = dice;
         _grid.SetGridObject(x, y, gridNode);
     }
