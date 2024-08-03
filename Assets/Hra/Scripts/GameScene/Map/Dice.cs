@@ -10,7 +10,7 @@ public class Dice : MonoBehaviour
 
     public Vector2Int Coordinates;
 
-    private int _value;
+    public int Value;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,15 +23,15 @@ public class Dice : MonoBehaviour
     public void Init(int x, int y, int randomValue)
     {
         Coordinates = new(x, y);
-        _value = randomValue;
+        Value = randomValue;
 
         SetValue();
     }
 
     public void DecreaseValue(int value)
     {
-        _value -= value;
-        if (_value <= 0)
+        Value -= value;
+        if (Value <= 0)
         {
             _rigidbody.useGravity = true;
             foreach (PlayerInput player in GameManager.Instance.Players)
@@ -52,7 +52,7 @@ public class Dice : MonoBehaviour
     {
         foreach (GameObject dot in _dots)
         {
-            dot.SetActive(_combinations[_value].Contains(dot));
+            dot.SetActive(_combinations[Value].Contains(dot));
         }
     }
 }

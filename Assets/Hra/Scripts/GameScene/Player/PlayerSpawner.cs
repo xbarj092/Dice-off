@@ -27,6 +27,9 @@ public class PlayerSpawner : MonoBehaviour
         newPlayer.GridNode = gridNode;
         newPlayer.transform.position = _mapGenerator.Grid.GetWorldPosition(x, y);
         newPlayer.transform.position += new Vector3(0, 1, 0);
-        GameManager.Instance.Players.Add(newPlayer);
+        if (!GameManager.Instance.Players.Contains(newPlayer))
+        {
+            GameManager.Instance.Players.Add(newPlayer);
+        }
     }
 }

@@ -84,7 +84,14 @@ public class PlayerInput : MonoBehaviour
         if (type == GameScreenType.Attack)
         {
             _nextNode.Dice.DecreaseValue(GameManager.Instance.NextDamageValue);
-            FinishTurn();
+            if (_nextNode.Dice.Value > 0)
+            {
+                FinishTurn();
+            }
+            else
+            {
+                GameManager.Instance.OnRoundWonInvoke(PlayerId);
+            }
         }
     }
 
@@ -125,7 +132,7 @@ public class PlayerInput : MonoBehaviour
         if (collision.gameObject.CompareTag("Death"))
         {
             Destroy(gameObject);
-            ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.GameOver);
+            GameManager.Instance.OnRoundWonInvoke(PlayerId);
         }
     }
 }
