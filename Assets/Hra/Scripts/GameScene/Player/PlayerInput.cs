@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -8,7 +9,9 @@ public class PlayerInput : MonoBehaviour
     public Rigidbody Rigidbody;
     public float moveSpeed = 5f;
 
+    private GridNode _nextNode;
     private bool isMoving = false;
+    private bool _hasAttackedThisTurn = false;
     private Vector3 targetPosition;
 
     private void Update()
@@ -53,20 +56,35 @@ public class PlayerInput : MonoBehaviour
         if (horizontal != 0 || vertical != 0)
         {
             Vector3 nextNodePosition = new(GridNode.X + horizontal, 0, GridNode.Y + vertical);
-            GridNode nextNode = Grid.GetGridObject(nextNodePosition);
+            _nextNode = Grid.GetGridObject(nextNodePosition);
 
-            if (nextNode != null)
+            if (_nextNode != null)
             {
-                if (IsNodeOccupiedByAnotherPlayer(nextNode))
+                if (IsNodeOccupiedByAnotherPlayer(_nextNode))
                 {
-                    Debug.Log("[PlayerInput] - this node is occupied by another player");
+                    if (!_hasAttackedThisTurn)
+                    {
+                        ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.Attack);
+                        ScreenEvents.OnGameScreenClosed += DealDamage;
+                        _hasAttackedThisTurn = true;
+                    }
                 }
                 else
                 {
-                    targetPosition = new(nextNode.X, 1, nextNode.Y);
+                    targetPosition = new(_nextNode.X, 1, _nextNode.Y);
                     isMoving = true;
                 }
             }
+        }
+    }
+
+    private void DealDamage(GameScreenType type)
+    {
+        ScreenEvents.OnGameScreenClosed -= DealDamage;
+        if (type == GameScreenType.Attack)
+        {
+            _nextNode.Dice.DecreaseValue(GameManager.Instance.NextDamageValue);
+            FinishTurn();
         }
     }
 
@@ -90,7 +108,7 @@ public class PlayerInput : MonoBehaviour
         {
             transform.position = targetPosition;
             GridNode = Grid.GetGridObject(targetPosition);
-            GridNode.Dice.DecreaseValue(true);
+            GridNode.Dice.DecreaseValue(1);
             isMoving = false;
             FinishTurn();
         }
@@ -99,5 +117,15 @@ public class PlayerInput : MonoBehaviour
     private void FinishTurn()
     {
         GameManager.Instance.PlayerIndexPlaying = (GameManager.Instance.PlayerIndexPlaying + 1) % GameManager.Instance.Players.Count;
+        _hasAttackedThisTurn = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            Destroy(gameObject);
+            ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.GameOver);
+        }
     }
 }
