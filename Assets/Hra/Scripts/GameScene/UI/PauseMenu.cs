@@ -16,6 +16,7 @@ public class PauseMenu : GameScreen
     public void RestartRound()
     {
         GameManager.Instance.Players = new();
+        GameManager.Instance.Turns = 0;
         SceneLoadManager.Instance.RestartGame();
     }
 
