@@ -48,18 +48,58 @@ public class PlayerInput : MonoBehaviour
             {
                 TutorialEvents.OnPlayerMovedInvoke();
                 _hasPlayedThisTurn = true;
-                if (IsNodeOccupiedByAnotherPlayer(_nextNode))
+
+                if (!TutorialManager.Instance.CompletedTutorials.Contains(TutorialID.Attack))
                 {
-                    SceneLoadManager.Instance.GoGameToAttack();
-                    SceneLoader.OnSceneUnloadDone += DealDamage;
+                    if (TutorialManager.Instance.IsTutorialPlaying(TutorialID.Attack) && IsNodeOccupiedByAnotherPlayer(_nextNode))
+                    {
+                        TutorialEvents.OnPlayerAttackedInvoke();
+                        SceneLoadManager.Instance.GoGameToAttack();
+                        SceneLoader.OnSceneUnloadDone += DealDamage;
+                    }
+                    else
+                    {
+                        _targetPosition = new(_nextNode.X, 1, _nextNode.Y);
+                        _isMoving = true;
+                    }
                 }
                 else
                 {
-                    _targetPosition = new(_nextNode.X, 1, _nextNode.Y);
-                    _isMoving = true;
+                    if (IsNodeOccupiedByAnotherPlayer(_nextNode))
+                    {
+                        SceneLoadManager.Instance.GoGameToAttack();
+                        SceneLoader.OnSceneUnloadDone += DealDamage;
+                    }
+                    else
+                    {
+                        _targetPosition = new(_nextNode.X, 1, _nextNode.Y);
+                        _isMoving = true;
+                    }
                 }
             }
         }
+    }
+
+    private bool IsNeighboringNodeOccupiedByAnotherPlayer(GridNode node)
+    {
+        Vector3[] neighborOffsets = new Vector3[]
+        {
+            new(1, 0, 0),
+            new(-1, 0, 0),
+            new(0, 0, 1),
+            new(0, 0, -1)
+        };
+
+        foreach (Vector3 offset in neighborOffsets)
+        {
+            GridNode neighborNode = Grid.GetGridObject(new(node.X + offset.x, 0, node.Y + offset.z));
+            if (neighborNode != null && IsNodeOccupiedByAnotherPlayer(neighborNode))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void DealDamage(SceneLoader.Scenes scene)
@@ -97,6 +137,10 @@ public class PlayerInput : MonoBehaviour
 
         if (Vector3.Distance(transform.position, _targetPosition) < 0.001f)
         {
+            if (IsNeighboringNodeOccupiedByAnotherPlayer(_nextNode))
+            {
+                TutorialManager.Instance.InstantiateTutorial(TutorialID.Attack);
+            }
             transform.position = _targetPosition;
             GridNode = Grid.GetGridObject(_targetPosition);
             GridNode.Dice.DecreaseValue(1);

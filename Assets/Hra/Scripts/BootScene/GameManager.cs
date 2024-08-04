@@ -85,6 +85,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void RestartGame()
     {
         Players = new();
+        Turns = 0;
         PlayerOneRounds = 0;
         PlayerTwoRounds = 0;
         SceneLoadManager.Instance.RestartGame();

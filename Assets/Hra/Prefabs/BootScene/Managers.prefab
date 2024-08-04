@@ -222,7 +222,7 @@ MonoBehaviour:
   <TutorialsEnabled>k__BackingField: 1
   <TutorialList>k__BackingField:
   - {fileID: 2948798742160830293, guid: 44161edbb9d00d54f8e8a18140c5660c, type: 3}
-  - {fileID: 2948798742160830293, guid: 381bf6dd7defcf34e8bb15d4cae0f3fb, type: 3}
+  - {fileID: 2948798742160830293, guid: d414289f13d8daa44bdaa800970eb478, type: 3}
   CompletedTutorials: 
 --- !u!1 &8295087964630554883
 GameObject:
