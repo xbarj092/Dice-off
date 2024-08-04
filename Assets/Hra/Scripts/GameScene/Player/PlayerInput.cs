@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -37,7 +38,7 @@ public class PlayerInput : MonoBehaviour
             Vector3 nextNodePosition = new(GridNode.X + horizontal, 0, GridNode.Y + vertical);
             _nextNode = Grid.GetGridObject(nextNodePosition);
 
-            if (_nextNode != null)
+            if (_nextNode != null && DiceManager.Instance.GetAllDices().Any(dice => dice.GridNode == _nextNode))
             {
                 if (IsNodeOccupiedByAnotherPlayer(_nextNode))
                 {
