@@ -12,6 +12,6 @@ public class AttackScreen : GameScreen
 
     private void SetPlayerAttackingText()
     {
-        _playerAttackingText.text = $"Player " + GameManager.Instance.PlayerIndexPlaying + " is attacking!";
+        _playerAttackingText.text = $"" + GameManager.Instance.PlayerNames[GameManager.Instance.PlayerIndexPlaying] + " is attacking!";
     }
 }

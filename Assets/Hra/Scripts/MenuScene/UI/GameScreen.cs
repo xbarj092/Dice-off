@@ -9,7 +9,8 @@ public enum GameScreenType
     MenuMain = 4,
     Upgrades = 5,
     Loadout = 6,
-    GameOver = 7
+    GameOver = 7,
+    NameChange = 8
 }
 
 public class GameScreen : MonoBehaviour

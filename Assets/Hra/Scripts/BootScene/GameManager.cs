@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public List<PlayerInput> Players = new();
+    public List<string> PlayerNames = new();
     public int PlayerIndexPlaying = 0;
     public int NextDamageValue;
 
