@@ -21,14 +21,37 @@ public class SceneLoadManager : MonoSingleton<SceneLoadManager>
 
     public void GoMenuToGame()
     {
-        SceneLoader.OnSceneLoadDone += OnMenuToHubLoadDone;
+        SceneLoader.OnSceneLoadDone += OnMenuToGameLoadDone;
         // Cursor.lockState = CursorLockMode.Locked;
         SceneLoader.LoadScene(SceneLoader.Scenes.GameScene, toUnload: SceneLoader.Scenes.MenuScene);
     }
 
-    private void OnMenuToHubLoadDone(SceneLoader.Scenes scenes)
+    private void OnMenuToGameLoadDone(SceneLoader.Scenes scenes)
     {
-        SceneLoader.OnSceneLoadDone -= OnMenuToHubLoadDone;
+        SceneLoader.OnSceneLoadDone -= OnMenuToGameLoadDone;
+        // Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void GoGameToAttack()
+    {
+        SceneLoader.OnSceneLoadDone += OnGameToAttackLoadDone;
+        SceneLoader.LoadScene(SceneLoader.Scenes.AttackScene);
+    }
+
+    private void OnGameToAttackLoadDone(SceneLoader.Scenes scenes)
+    {
+        SceneLoader.OnSceneLoadDone -= OnGameToAttackLoadDone;
+    }
+
+    public void GoAttackToGame()
+    {
+        SceneLoader.OnSceneLoadDone += OnAttackToGameLoadDone;
+        SceneLoader.UnloadScene(SceneLoader.Scenes.AttackScene);
+    }
+
+    private void OnAttackToGameLoadDone(SceneLoader.Scenes scenes)
+    {
+        SceneLoader.OnSceneLoadDone -= OnAttackToGameLoadDone;
         // Cursor.lockState = CursorLockMode.Locked;
     }
 

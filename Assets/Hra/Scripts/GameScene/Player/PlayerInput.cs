@@ -44,8 +44,8 @@ public class PlayerInput : MonoBehaviour
                 _hasPlayedThisTurn = true;
                 if (IsNodeOccupiedByAnotherPlayer(_nextNode))
                 {
-                    ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.Attack);
-                    ScreenEvents.OnGameScreenClosed += DealDamage;
+                    SceneLoadManager.Instance.GoGameToAttack();
+                    SceneLoader.OnSceneUnloadDone += DealDamage;
                 }
                 else
                 {
@@ -56,11 +56,11 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void DealDamage(GameScreenType type)
+    private void DealDamage(SceneLoader.Scenes scene)
     {
-        ScreenEvents.OnGameScreenClosed -= DealDamage;
-        if (type == GameScreenType.Attack)
+        if (scene == SceneLoader.Scenes.AttackScene)
         {
+            SceneLoader.OnSceneUnloadDone -= DealDamage;
             _nextNode.Dice.DecreaseValue(GameManager.Instance.NextDamageValue);
             if (_nextNode.Dice.Value > 0)
             {

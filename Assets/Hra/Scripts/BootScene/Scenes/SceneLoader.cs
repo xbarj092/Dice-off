@@ -9,7 +9,8 @@ public static class SceneLoader
     {
         BootScene,
         MenuScene,
-        GameScene
+        GameScene,
+        AttackScene
     }
 
     private static readonly float MAX_LOAD_PROGRESS = 1f;
@@ -92,7 +93,10 @@ public static class SceneLoader
     {
         _sceneToUnload = scene;
         AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scene.ToString());
-        unloadOp.completed += SceneUnloadDone;
+        if (unloadOp != null)
+        {
+            unloadOp.completed += SceneUnloadDone;
+        }
     }
 
     private static void SceneUnloadDone(AsyncOperation unloadOp)
