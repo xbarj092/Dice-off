@@ -14,8 +14,8 @@ public class Dice : MonoBehaviour
     [SerializeField] private SerializedDictionary<int, List<GameObject>> _combinations = new(); 
 
     public GridNode GridNode;
-
     public int Value;
+    public bool IsFalling = false;
 
     private void OnEnable()
     {
@@ -24,6 +24,7 @@ public class Dice : MonoBehaviour
 
     private void OnDisable()
     {
+        IsFalling = false;
         DiceManager.Instance.UnregisterDice(this);
     }
 
@@ -58,6 +59,7 @@ public class Dice : MonoBehaviour
 
     private IEnumerator Fall()
     {
+        IsFalling = true;
         _animator.PlayAnimation(DiceAnimations.Fall);
         _effectPlayer.PlayFallFX();
         yield return new WaitForSeconds(1);
