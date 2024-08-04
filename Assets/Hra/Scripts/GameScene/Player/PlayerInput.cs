@@ -16,11 +16,6 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            HandlePauseInput();
-        }
-
         if (GameManager.Instance.PlayerIndexPlaying == PlayerId && !isMoving)
         {
             HandleMovementInput();
@@ -29,22 +24,6 @@ public class PlayerInput : MonoBehaviour
         if (isMoving)
         {
             MoveToTarget();
-        }
-    }
-
-    private void HandlePauseInput()
-    {
-        if (ScreenManager.Instance.ActiveGameScreen.GameScreenType == GameScreenType.Pause)
-        {
-            ScreenEvents.OnGameScreenClosedInvoke(GameScreenType.Pause);
-        }
-        else if (ScreenManager.Instance.ActiveGameScreen != null)
-        {
-            ScreenEvents.OnGameScreenClosedInvoke(ScreenManager.Instance.ActiveGameScreen.GameScreenType);
-        }
-        else
-        {
-            ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.Pause);
         }
     }
 
