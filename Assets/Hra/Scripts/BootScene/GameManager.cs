@@ -31,12 +31,13 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         Turns++;
-        OnTurnFinished?.Invoke();
         if (Players.Count > 1)
         {
             PlayerIndexPlaying = (PlayerIndexPlaying + 1) % Players.Count;
             onSuccess?.Invoke();
         }
+
+        OnTurnFinished?.Invoke();
     }
 
     public event Action<int> OnRoundWon;
