@@ -116,7 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameOverScreenPrefab: {fileID: 8284765764717577413, guid: 34d84cd2a6bc3514caddf1900a6e4b80, type: 3}
-  _attackScreenPrefab: {fileID: 8062191842570758434, guid: 31a568771f6b21d4dba661146a6ea4a2, type: 3}
   _optionsScreenPrefab: {fileID: 5702799324989674924, guid: 41d86d266927fef4e8db9f5e7ff87615, type: 3}
   _pauseScreenPrefab: {fileID: 7083974892913250523, guid: 785d8a8ac3fa5b2409c5761930fa84b9, type: 3}
 --- !u!1001 &9190100131233055067
