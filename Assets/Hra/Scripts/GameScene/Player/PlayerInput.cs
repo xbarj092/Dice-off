@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private List<Material> _playerMats;
+
     public int PlayerId;
     public GridNode GridNode;
     public Grid<GridNode> Grid;
@@ -19,6 +23,8 @@ public class PlayerInput : MonoBehaviour
     private void Start()
     {
         CanPlay = TutorialManager.Instance.CompletedTutorials.Contains(TutorialID.Field);
+
+        _meshRenderer.material = _playerMats[PlayerId];
     }
 
     private void Update()

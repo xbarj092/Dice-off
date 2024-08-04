@@ -44,7 +44,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void OnRoundWonInvoke(int playerIndex)
     {
         Players = new();
-        if (playerIndex == 0)
+        if (playerIndex == 1)
         {
             PlayerOneRounds++;
         }
