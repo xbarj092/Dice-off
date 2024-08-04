@@ -1517,6 +1517,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1889415568992493614, guid: 31a568771f6b21d4dba661146a6ea4a2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889415568992493614, guid: 31a568771f6b21d4dba661146a6ea4a2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6741156540294879269, guid: 31a568771f6b21d4dba661146a6ea4a2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -200

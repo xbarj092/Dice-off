@@ -11,6 +11,16 @@ public class HUDScreen : MonoBehaviour
     {
         SetUpRounds(GameManager.Instance.PlayerOneRounds, 0);
         SetUpRounds(GameManager.Instance.PlayerTwoRounds, 1);
+        StartCoroutine(SetUpNames());
+    }
+
+    private IEnumerator SetUpNames()
+    {
+        yield return new WaitForSeconds(0.05f);
+        for (int i = 0; i < GameManager.Instance.Players.Count; i++)
+        {
+            _playerHUD[i].SetPlayerName(GameManager.Instance.PlayerNames[i]);
+        }
     }
 
     private void OnEnable()

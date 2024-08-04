@@ -8,7 +8,7 @@ public class PlayerHUD : MonoBehaviour
 
     public void SetPlayerName(string name)
     {
-
+        _playerName.text = name;
     }
 
     public void WinRound()

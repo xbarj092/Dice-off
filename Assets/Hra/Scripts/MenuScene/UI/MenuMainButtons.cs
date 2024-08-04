@@ -4,7 +4,8 @@ public class MenuMainButtons : GameScreen
 {
     public void PlayTheGame()
     {
-        SceneLoadManager.Instance.GoMenuToGame();
+        ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.NameChange);
+        CloseScreen();
     }
 
     public void GoToOptions()

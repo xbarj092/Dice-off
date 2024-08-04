@@ -12,7 +12,7 @@ public class GameOverScreen : GameScreen
 
     private void SetPlayerWonText()
     {
-        _playerWon.text = $"Player " + GameManager.Instance.PlayerIndexPlaying + " won!";
+        _playerWon.text = $"" + GameManager.Instance.PlayerNames[GameManager.Instance.PlayerIndexPlaying] + " won!";
     }
 
     public void ContinueGame()

@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuMainButtonsPrefab: {fileID: 7076517889036245373, guid: bb9cd53902db29a42943ca3d52d796d2, type: 3}
+  _menuNameChangeScreen: {fileID: 6225386398519279329, guid: b6a0e093f2b5b0d42ac7ab6e0034a78c, type: 3}
   _optionsScreenPrefab: {fileID: 5702799324989674924, guid: 41d86d266927fef4e8db9f5e7ff87615, type: 3}
 --- !u!1001 &7454938460133177899
 PrefabInstance:

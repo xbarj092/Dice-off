@@ -26,6 +26,7 @@ public class PauseMenu : GameScreen
 
     public void ReturnToMenu()
     {
+        GameManager.Instance.Players = new();
         SceneLoadManager.Instance.GoGameToMenu();
     }
 
