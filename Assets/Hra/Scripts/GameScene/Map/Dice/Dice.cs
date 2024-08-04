@@ -7,11 +7,12 @@ public class Dice : MonoBehaviour
 {
     [SerializeField] private DiceAnimator _animator;
     [SerializeField] private DiceEffectPlayer _effectPlayer;
+    public DiceEffectPlayer DiceEffectPlayer => _effectPlayer;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private List<GameObject> _dots = new();
     [SerializeField] private SerializedDictionary<int, List<GameObject>> _combinations = new(); 
 
-    public Vector2Int Coordinates;
+    public GridNode GridNode;
 
     public int Value;
 
@@ -33,9 +34,9 @@ public class Dice : MonoBehaviour
         }
     }
 
-    public void Init(int x, int y, int randomValue)
+    public void Init(GridNode gridNode, int randomValue)
     {
-        Coordinates = new(x, y);
+        GridNode = gridNode;
         Value = randomValue;
 
         SetValue();

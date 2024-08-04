@@ -13,7 +13,7 @@ public class LowerRandomDicesValueStrategy : IEventStrategy
 
     public void Execute()
     {
-        List<Dice> dices = DiceManager.Instance.GetAllDices().OrderBy(d => Random.value).Take(_amount).ToList();
+        List<Dice> dices = DiceManager.Instance.GetAllDices().OrderBy(dice => Random.value).Take(_amount).ToList();
         foreach (Dice dice in dices)
         {
             dice.DecreaseValue(1);

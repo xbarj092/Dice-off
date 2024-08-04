@@ -17,7 +17,7 @@ public class DiceManager : MonoSingleton<DiceManager>
         }
     }
 
-    public IEnumerable<Dice> GetAllDices()
+    public List<Dice> GetAllDices()
     {
         return _dices;
     }
