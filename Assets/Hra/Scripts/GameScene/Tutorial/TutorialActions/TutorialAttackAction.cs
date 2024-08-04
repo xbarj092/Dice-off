@@ -15,11 +15,19 @@ public class TutorialAttackAction : TutorialAction
     {
         _tutorialPlayer.MoveToNextNarratorText();
         _clickToContinue.SetActive(true);
+        foreach (PlayerInput player in GameManager.Instance.Players)
+        {
+            player.CanPlay = false;
+        }
         _actionScheduler.ScheduleAction(HideText, () => Input.GetMouseButtonDown(0));
     }
 
     private void HideText()
     {
+        foreach (PlayerInput player in GameManager.Instance.Players)
+        {
+            player.CanPlay = true;
+        }
         _tutorialPlayer.PublicText.transform.parent.gameObject.SetActive(false);
         _clickToContinue.SetActive(false);
         TutorialEvents.OnPlayerAttacked += OnPlayerAttacked;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -116,13 +117,15 @@ public class PlayerInput : MonoBehaviour
             _nextNode.Dice.DecreaseValue(GameManager.Instance.NextDamageValue);
             if (_nextNode.Dice.Value > 0)
             {
-                FinishTurn();
-            }
-            else
-            {
-                GameManager.Instance.OnRoundWonInvoke(PlayerId);
+                StartCoroutine(DelayedDealDamage());
             }
         }
+    }
+
+    private IEnumerator DelayedDealDamage()
+    {
+        yield return new WaitForSeconds(2);
+        FinishTurn();
     }
 
     private bool IsNodeOccupiedByAnotherPlayer(GridNode node)
