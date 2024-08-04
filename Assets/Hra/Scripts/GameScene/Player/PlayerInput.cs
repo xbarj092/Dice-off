@@ -8,21 +8,22 @@ public class PlayerInput : MonoBehaviour
     public GridNode GridNode;
     public Grid<GridNode> Grid;
     public Rigidbody Rigidbody;
-    public float moveSpeed = 5f;
+    public float MoveSpeed = 10f;
+    public bool CanPlay = true;
 
     private GridNode _nextNode;
-    private bool isMoving = false;
-    private bool _hasAttackedThisTurn = false;
-    private Vector3 targetPosition;
+    private bool _isMoving = false;
+    private bool _hasPlayedThisTurn = false;
+    private Vector3 _targetPosition;
 
     private void Update()
     {
-        if (GameManager.Instance.PlayerIndexPlaying == PlayerId && !isMoving)
+        if (CanPlay && GameManager.Instance.PlayerIndexPlaying == PlayerId && !_isMoving && !_hasPlayedThisTurn)
         {
             HandleMovementInput();
         }
 
-        if (isMoving)
+        if (_isMoving)
         {
             MoveToTarget();
         }
@@ -40,19 +41,16 @@ public class PlayerInput : MonoBehaviour
 
             if (_nextNode != null && DiceManager.Instance.GetAllDices().Any(dice => dice.GridNode == _nextNode))
             {
+                _hasPlayedThisTurn = true;
                 if (IsNodeOccupiedByAnotherPlayer(_nextNode))
                 {
-                    if (!_hasAttackedThisTurn)
-                    {
-                        ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.Attack);
-                        ScreenEvents.OnGameScreenClosed += DealDamage;
-                        _hasAttackedThisTurn = true;
-                    }
+                    ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.Attack);
+                    ScreenEvents.OnGameScreenClosed += DealDamage;
                 }
                 else
                 {
-                    targetPosition = new(_nextNode.X, 1, _nextNode.Y);
-                    isMoving = true;
+                    _targetPosition = new(_nextNode.X, 1, _nextNode.Y);
+                    _isMoving = true;
                 }
             }
         }
@@ -89,23 +87,26 @@ public class PlayerInput : MonoBehaviour
 
     private void MoveToTarget()
     {
-        transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, _targetPosition, MoveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, targetPosition) < 0.001f)
+        if (Vector3.Distance(transform.position, _targetPosition) < 0.001f)
         {
-            transform.position = targetPosition;
-            GridNode = Grid.GetGridObject(targetPosition);
+            transform.position = _targetPosition;
+            GridNode = Grid.GetGridObject(_targetPosition);
             GridNode.Dice.DecreaseValue(1);
-            isMoving = false;
+            _isMoving = false;
             FinishTurn();
         }
     }
 
     private void FinishTurn()
     {
-        GameManager.Instance.OnTurnFinishedInvoke();
-        GameManager.Instance.PlayerIndexPlaying = (GameManager.Instance.PlayerIndexPlaying + 1) % GameManager.Instance.Players.Count;
-        _hasAttackedThisTurn = false;
+        GameManager.Instance.OnTurnFinishedInvoke(SetPlayedThisTurn);
+    }
+
+    private void SetPlayedThisTurn()
+    {
+        _hasPlayedThisTurn = false;
     }
 
     private void OnCollisionEnter(Collision collision)

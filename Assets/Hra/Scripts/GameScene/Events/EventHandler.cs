@@ -51,8 +51,16 @@ public class EventHandler : MonoBehaviour
 
     private IEnumerator DelayedDiceSelect(PredefinedDiceFallStrategy diceFallStrategy)
     {
+        foreach (PlayerInput player in GameManager.Instance.Players)
+        {
+            player.CanPlay = false;
+        }
         yield return new WaitForSeconds(2);
         diceFallStrategy.SelectRandomDiceForNextRound();
+        foreach (PlayerInput player in GameManager.Instance.Players)
+        {
+            player.CanPlay = true;
+        }
     }
 
     public void ScheduleNextEvent()

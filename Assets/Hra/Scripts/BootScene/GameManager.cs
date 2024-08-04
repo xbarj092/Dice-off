@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
@@ -15,10 +16,25 @@ public class GameManager : MonoSingleton<GameManager>
     public int Turns;
 
     public event Action OnTurnFinished;
-    public void OnTurnFinishedInvoke()
+    public void OnTurnFinishedInvoke(Action onSuccess)
     {
+        StartCoroutine(WaitForDiceToStopFalling(onSuccess));
+    }
+
+    private IEnumerator WaitForDiceToStopFalling(Action onSuccess)
+    {
+        while (DiceManager.Instance.GetAllDices().Any(dice => dice.IsFalling))
+        {
+            yield return new WaitForSeconds(1f);
+        }
+
         Turns++;
         OnTurnFinished?.Invoke();
+        if (Players.Count > 1)
+        {
+            PlayerIndexPlaying = (PlayerIndexPlaying + 1) % Players.Count;
+            onSuccess?.Invoke();
+        }
     }
 
     public event Action<int> OnRoundWon;
