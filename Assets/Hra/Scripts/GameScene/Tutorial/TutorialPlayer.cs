@@ -10,9 +10,9 @@ public enum ChosenActionType
 }
 
 public class TutorialPlayer : MonoBehaviour
-{
+{ 
     [SerializeField] private TMP_Text _text;
-    public TMP_Text Text => _text;
+    public TMP_Text PublicText => _text;
     [field: SerializeField] public TutorialID TutorialID { get; private set; }
 
     public TutorialAction Action;

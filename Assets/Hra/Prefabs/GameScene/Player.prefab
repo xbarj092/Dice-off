@@ -121,6 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d839288e4b953564881d40e25f2ac658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 7999794998779387053}
+  _playerMats:
+  - {fileID: 2100000, guid: 02c2b16137783074e85e0404d56305f6, type: 2}
+  - {fileID: 2100000, guid: 9b623f285c3db374f96913f08d48935d, type: 2}
   PlayerId: 0
   GridNode:
     X: 0
@@ -129,7 +133,8 @@ MonoBehaviour:
     Dice: {fileID: 0}
     DistanceFromStart: 0
   Rigidbody: {fileID: 1547034276974348576}
-  moveSpeed: 5
+  MoveSpeed: 10
+  CanPlay: 1
 --- !u!54 &1547034276974348576
 Rigidbody:
   m_ObjectHideFlags: 0

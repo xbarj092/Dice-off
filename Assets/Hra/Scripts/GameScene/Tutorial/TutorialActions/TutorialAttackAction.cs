@@ -20,7 +20,7 @@ public class TutorialAttackAction : TutorialAction
 
     private void HideText()
     {
-        _tutorialPlayer.Text.transform.parent.gameObject.SetActive(false);
+        _tutorialPlayer.PublicText.transform.parent.gameObject.SetActive(false);
         _clickToContinue.SetActive(false);
         TutorialEvents.OnPlayerAttacked += OnPlayerAttacked;
     }
@@ -28,7 +28,7 @@ public class TutorialAttackAction : TutorialAction
     private void OnPlayerAttacked()
     {
         TutorialEvents.OnPlayerAttacked -= OnPlayerAttacked;
-        _tutorialPlayer.Text.transform.parent.gameObject.SetActive(true);
+        _tutorialPlayer.PublicText.transform.parent.gameObject.SetActive(true);
         _clickToContinue.SetActive(true);
         _tutorialPlayer.MoveToNextNarratorText();
         _actionScheduler.ScheduleAction(OnActionFinishedInvoke, () => Input.GetMouseButtonDown(0));
