@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EventHandler : MonoBehaviour
@@ -26,16 +27,32 @@ public class EventHandler : MonoBehaviour
     {
         if (_strategy != null && _strategy is PredefinedDiceFallStrategy diceFallStrategy)
         {
+            bool triggered = false;
             if (GameManager.Instance.Turns > 0)
             {
                 TriggerEvent();
+                triggered = true;
             }
-            diceFallStrategy.SelectRandomDiceForNextRound();
+
+            if (triggered)
+            {
+                StartCoroutine(DelayedDiceSelect(diceFallStrategy));
+            }
+            else
+            {
+                diceFallStrategy.SelectRandomDiceForNextRound();
+            }
         }
         else if (GameManager.Instance.Turns > 0 && GameManager.Instance.Turns % _turnsPerEventInvoke == 0)
         {
             TriggerEvent();
         }
+    }
+
+    private IEnumerator DelayedDiceSelect(PredefinedDiceFallStrategy diceFallStrategy)
+    {
+        yield return new WaitForSeconds(2);
+        diceFallStrategy.SelectRandomDiceForNextRound();
     }
 
     public void ScheduleNextEvent()

@@ -8,7 +8,10 @@ public class PredefinedDiceFallStrategy : IEventStrategy
 
     public void Execute()
     {
-        DropDice(_diceToDrop);
+        if (_diceToDrop != null)
+        {
+            DropDice(_diceToDrop);
+        }
     }
 
     public void SelectRandomDiceForNextRound()
