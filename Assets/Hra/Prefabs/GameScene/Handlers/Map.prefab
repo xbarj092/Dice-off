@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8950703904853812779}
   - component: {fileID: 7834409544574172468}
+  - component: {fileID: 6254899212343674206}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -152,6 +153,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dicePrefab: {fileID: 5753511329321622006, guid: 84a46bee9f580d54a87e807fecac74b1, type: 3}
+--- !u!114 &6254899212343674206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6488720604210407467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accf1d7ccf47e584c85ac7be29829505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Round: 1
+  TurnsPerRound: 6
 --- !u!1001 &7312315813673891216
 PrefabInstance:
   m_ObjectHideFlags: 0
