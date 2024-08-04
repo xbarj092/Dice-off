@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class HUDScreen : MonoBehaviour
         SetUpRounds(GameManager.Instance.PlayerOneRounds, 0);
         SetUpRounds(GameManager.Instance.PlayerTwoRounds, 1);
         StartCoroutine(SetUpNames());
+        SetCurrentlyPlaying();
     }
 
     private IEnumerator SetUpNames()
@@ -27,16 +29,37 @@ public class HUDScreen : MonoBehaviour
     {
         GameEvents.OnEventTypeChanged += SetUpEvent;
         GameManager.Instance.OnRoundWon += RoundWon;
+        GameManager.Instance.OnTurnFinished += OnTurnFinished;
     }
 
     private void OnDisable()
     {
         GameEvents.OnEventTypeChanged -= SetUpEvent;
         GameManager.Instance.OnRoundWon -= RoundWon;
+        GameManager.Instance.OnTurnFinished -= OnTurnFinished;
+    }
+
+    private void OnTurnFinished()
+    {
+        _event.UpdateEventCountText(6 - GameManager.Instance.Turns % 6);
+        SetCurrentlyPlaying();
+    }
+
+    private void SetCurrentlyPlaying()
+    {
+        for (int i = 0; i < _playerHUD.Count; i++)
+        {
+            _playerHUD[i].SetCurrentlyPlaying(i);
+        }
     }
 
     private void SetUpEvent(EventType eventType)
     {
+        if (eventType == EventType.PredefinedDiceFall)
+        {
+            _event.DisableText();
+        }
+
         _event.SetUpEvent(eventType);
     }
 
