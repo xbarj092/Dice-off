@@ -9,6 +9,7 @@ public class EventHandler : MonoBehaviour
     private void Start()
     {
         ScheduleNextEvent();
+        TryInvokeEvent();
     }
 
     private void OnEnable()
@@ -23,7 +24,15 @@ public class EventHandler : MonoBehaviour
 
     private void TryInvokeEvent()
     {
-        if (GameManager.Instance.Turns % _turnsPerEventInvoke == 0)
+        if (_strategy != null && _strategy is PredefinedDiceFallStrategy diceFallStrategy)
+        {
+            if (GameManager.Instance.Turns > 0)
+            {
+                TriggerEvent();
+            }
+            diceFallStrategy.SelectRandomDiceForNextRound();
+        }
+        else if (GameManager.Instance.Turns > 0 && GameManager.Instance.Turns % _turnsPerEventInvoke == 0)
         {
             TriggerEvent();
         }
