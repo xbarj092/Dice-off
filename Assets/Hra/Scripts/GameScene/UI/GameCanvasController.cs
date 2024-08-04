@@ -6,6 +6,14 @@ public class GameCanvasController : BaseCanvasController
     [SerializeField] private OptionsScreen _optionsScreenPrefab;
     [SerializeField] private PauseMenu _pauseScreenPrefab;
 
+    private void Awake()
+    {
+        if (!TutorialManager.Instance.CompletedTutorials.Contains(TutorialID.Field))
+        {
+            TutorialManager.Instance.InstantiateTutorial(TutorialID.Field);
+        }
+    }
+
     protected override GameScreen GetRelevantScreen(GameScreenType gameScreenType)
     {
         return gameScreenType switch
