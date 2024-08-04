@@ -15,6 +15,7 @@ public class GameManager : MonoSingleton<GameManager>
     public int PlayerTwoRounds;
 
     public int Turns;
+    public IEventStrategy Strategy;
 
     public event Action OnTurnFinished;
     public void OnTurnFinishedInvoke(Action onSuccess)
@@ -30,12 +31,13 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         Turns++;
-        OnTurnFinished?.Invoke();
         if (Players.Count > 1)
         {
             PlayerIndexPlaying = (PlayerIndexPlaying + 1) % Players.Count;
             onSuccess?.Invoke();
         }
+
+        OnTurnFinished?.Invoke();
     }
 
     public event Action<int> OnRoundWon;

@@ -54,6 +54,21 @@ public class ThrowDice : MonoBehaviour
             _hasSettled = true;
             StartCoroutine(LoadToGame());
         }
+        else
+        {
+            AlignDiceRotation();
+        }
+    }
+
+    private void AlignDiceRotation()
+    {
+        Vector3 alignedEulerAngles = new(
+            Mathf.Round(_diceRigidbody.transform.rotation.eulerAngles.x / 90) * 90,
+            Mathf.Round(_diceRigidbody.transform.rotation.eulerAngles.y / 90) * 90,
+            Mathf.Round(_diceRigidbody.transform.rotation.eulerAngles.z / 90) * 90
+        );
+
+        _diceRigidbody.transform.rotation = Quaternion.Euler(alignedEulerAngles);
     }
 
     private IEnumerator LoadToGame()
