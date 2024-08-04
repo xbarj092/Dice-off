@@ -13,6 +13,12 @@ public class DiceEffectPlayer : MonoBehaviour
 
     public void PlayNextRoundFallFX()
     {
-        _meshRenderer.material = _nextRoundFallMat;
+        Material[] materials = new Material[_meshRenderer.materials.Length];
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i] = _nextRoundFallMat;
+        }
+
+        _meshRenderer.materials = materials;
     }
 }

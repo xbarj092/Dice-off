@@ -27,16 +27,28 @@ public class HUDScreen : MonoBehaviour
     {
         GameEvents.OnEventTypeChanged += SetUpEvent;
         GameManager.Instance.OnRoundWon += RoundWon;
+        GameManager.Instance.OnTurnFinished += UpdateEventCount;
     }
 
     private void OnDisable()
     {
         GameEvents.OnEventTypeChanged -= SetUpEvent;
         GameManager.Instance.OnRoundWon -= RoundWon;
+        GameManager.Instance.OnTurnFinished -= UpdateEventCount;
+    }
+
+    private void UpdateEventCount()
+    {
+        _event.UpdateEventCountText(6 - GameManager.Instance.Turns % 6);
     }
 
     private void SetUpEvent(EventType eventType)
     {
+        if (eventType == EventType.PredefinedDiceFall)
+        {
+            _event.DisableText();
+        }
+
         _event.SetUpEvent(eventType);
     }
 

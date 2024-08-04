@@ -15,6 +15,7 @@ public class GameManager : MonoSingleton<GameManager>
     public int PlayerTwoRounds;
 
     public int Turns;
+    public IEventStrategy Strategy;
 
     public event Action OnTurnFinished;
     public void OnTurnFinishedInvoke(Action onSuccess)

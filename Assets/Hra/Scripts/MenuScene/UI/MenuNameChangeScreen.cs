@@ -36,7 +36,7 @@ public class MenuNameChangeScreen : GameScreen
         _playerTwoName.onValueChanged.RemoveListener(HandlePlayerTwoNameChange);
         _playerTwoName.onEndEdit.RemoveListener(EnforcePlayerTwoNameLength);
     }
-
+    
     private void HandlePlayerOneNameChange(string newName)
     {
         if (newName.Length > MaxNameLength)
