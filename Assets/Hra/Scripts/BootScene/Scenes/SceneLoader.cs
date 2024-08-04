@@ -93,7 +93,10 @@ public static class SceneLoader
     {
         _sceneToUnload = scene;
         AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scene.ToString());
-        unloadOp.completed += SceneUnloadDone;
+        if (unloadOp != null)
+        {
+            unloadOp.completed += SceneUnloadDone;
+        }
     }
 
     private static void SceneUnloadDone(AsyncOperation unloadOp)
