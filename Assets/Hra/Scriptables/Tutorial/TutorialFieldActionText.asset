@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: TutorialFieldActionText
   m_EditorClassIdentifier: 
   <Strings>k__BackingField:
-  - You can use WASD or arrows for movement
+  - The person who is currently playing has their name highlighted with a border
+  - Each round, new event gets announced. You can see what event is currently active
+    in the upper part of the screen. For some events, there is a counter indicating
+    in how many turns will the event take effect.
   - After stepping on a dice, value of it decreases, and when the value reaches 0
     the dice falls, so watch your step!
+  - You can use WASD or arrows for movement

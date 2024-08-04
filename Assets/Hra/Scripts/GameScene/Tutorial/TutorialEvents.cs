@@ -7,4 +7,10 @@ public static class TutorialEvents
     {
         OnPlayerMoved?.Invoke();
     }
+
+    public static event Action OnPlayerAttacked;
+    public static void OnPlayerAttackedInvoke()
+    {
+        OnPlayerAttacked?.Invoke();
+    }
 }

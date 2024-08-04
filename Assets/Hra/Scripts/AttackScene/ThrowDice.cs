@@ -52,7 +52,10 @@ public class ThrowDice : MonoBehaviour
         {
             GameManager.Instance.NextDamageValue = _colliders[_bottomCollider.Collider];
             _hasSettled = true;
-            StartCoroutine(LoadToGame());
+            if (TutorialManager.Instance.CompletedTutorials.Contains(TutorialID.Attack))
+            {
+                StartCoroutine(LoadToGame());
+            }
         }
         else
         {
