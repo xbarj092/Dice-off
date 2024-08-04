@@ -16,6 +16,11 @@ public class PlayerInput : MonoBehaviour
     private bool _hasPlayedThisTurn = false;
     private Vector3 _targetPosition;
 
+    private void Start()
+    {
+        CanPlay = TutorialManager.Instance.CompletedTutorials.Contains(TutorialID.Field);
+    }
+
     private void Update()
     {
         if (CanPlay && GameManager.Instance.PlayerIndexPlaying == PlayerId && !_isMoving && !_hasPlayedThisTurn)
@@ -41,6 +46,7 @@ public class PlayerInput : MonoBehaviour
 
             if (_nextNode != null && DiceManager.Instance.GetAllDices().Any(dice => dice.GridNode == _nextNode))
             {
+                TutorialEvents.OnPlayerMovedInvoke();
                 _hasPlayedThisTurn = true;
                 if (IsNodeOccupiedByAnotherPlayer(_nextNode))
                 {

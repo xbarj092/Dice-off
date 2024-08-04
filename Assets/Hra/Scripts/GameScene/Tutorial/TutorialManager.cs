@@ -5,10 +5,8 @@ using UnityEngine;
 public enum TutorialID
 {
     None = 0,
-    Shop = 1,
-    Loadout = 2,
-    Combat = 3,
-    Death = 4
+    Field = 1,
+    Attack = 2,
 }
 
 public class TutorialManager : MonoSingleton<TutorialManager>

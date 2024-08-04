@@ -2,7 +2,7 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
-public class TutorialDeathAction : TutorialAction
+public class TutorialAttackAction : TutorialAction
 {
     public override void Exit()
     {
