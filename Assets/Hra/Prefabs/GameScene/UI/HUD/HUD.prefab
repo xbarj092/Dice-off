@@ -414,11 +414,11 @@ MonoBehaviour:
   _eventIcons:
     _serializedList:
     - Key: 0
-      Value: {fileID: 21300000, guid: 382dbadcf89f7664aa48e17f3ffa9aa9, type: 3}
+      Value: {fileID: 21300000, guid: 399ac8c3dd0533249a7c31eb5d5392a4, type: 3}
     - Key: 1
-      Value: {fileID: 21300000, guid: 8d1b72da7554e034b863a25b96029563, type: 3}
+      Value: {fileID: 21300000, guid: 1124a27f2b1c51b4f818fcb06e92869e, type: 3}
     - Key: 2
-      Value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+      Value: {fileID: 21300000, guid: 0c80fe80003890b4d8c9a7435d315b05, type: 3}
   _eventImage: {fileID: 4538132054178507314}
 --- !u!1 &7517706265776304244
 GameObject:
