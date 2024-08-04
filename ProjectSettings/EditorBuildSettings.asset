@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Hra/Scenes/GameScene.unity
     guid: 1444c4aaaaea39e41914ad8747da4539
+  - enabled: 1
+    path: Assets/Hra/Scenes/AttackScene.unity
+    guid: 47d97f2b20a6f6849bf0a019ef05f12a
   m_configObjects: {}
