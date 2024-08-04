@@ -102,6 +102,7 @@ public class PlayerInput : MonoBehaviour
 
     private void FinishTurn()
     {
+        GameManager.Instance.OnTurnFinishedInvoke();
         GameManager.Instance.PlayerIndexPlaying = (GameManager.Instance.PlayerIndexPlaying + 1) % GameManager.Instance.Players.Count;
         _hasAttackedThisTurn = false;
     }

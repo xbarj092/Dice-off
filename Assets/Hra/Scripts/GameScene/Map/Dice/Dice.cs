@@ -15,6 +15,16 @@ public class Dice : MonoBehaviour
 
     public int Value;
 
+    private void OnEnable()
+    {
+        DiceManager.Instance.RegisterDice(this);
+    }
+
+    private void OnDisable()
+    {
+        DiceManager.Instance.UnregisterDice(this);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Death"))

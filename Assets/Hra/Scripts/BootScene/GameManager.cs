@@ -12,6 +12,15 @@ public class GameManager : MonoSingleton<GameManager>
     public int PlayerOneRounds;
     public int PlayerTwoRounds;
 
+    public int Turns;
+
+    public event Action OnTurnFinished;
+    public void OnTurnFinishedInvoke()
+    {
+        Turns++;
+        OnTurnFinished?.Invoke();
+    }
+
     public event Action<int> OnRoundWon;
     public void OnRoundWonInvoke(int playerIndex)
     {
@@ -25,6 +34,7 @@ public class GameManager : MonoSingleton<GameManager>
             PlayerTwoRounds++;
         }
 
+        Turns = 0;
         OnRoundWon?.Invoke(playerIndex);
 
         if (PlayerOneRounds >= 2 || PlayerTwoRounds >= 2)
@@ -38,6 +48,12 @@ public class GameManager : MonoSingleton<GameManager>
             SceneLoadManager.Instance.RestartGame();
         }
     }
+    
+    private IEnumerator DelayScreenOpen()
+    {
+        yield return new WaitForSeconds(2);
+        ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.GameOver);
+    }
 
     private void Update()
     {
@@ -45,12 +61,6 @@ public class GameManager : MonoSingleton<GameManager>
         {
             HandlePauseInput();
         }
-    }
-
-    private IEnumerator DelayScreenOpen()
-    {
-        yield return new WaitForSeconds(2);
-        ScreenEvents.OnGameScreenOpenedInvoke(GameScreenType.GameOver);
     }
 
     public void RestartGame()

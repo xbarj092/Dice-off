@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d00d4ce3673052458666deedbd56d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _event: {fileID: 8371977295819327057}
   _playerHUD:
   - {fileID: 2342475052268252298}
   - {fileID: 948429134485101545}
@@ -333,6 +334,7 @@ GameObject:
   - component: {fileID: 5014343333089123398}
   - component: {fileID: 3383792624713863448}
   - component: {fileID: 4538132054178507314}
+  - component: {fileID: 8371977295819327057}
   m_Layer: 5
   m_Name: Event
   m_TagString: Untagged
@@ -397,6 +399,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8371977295819327057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718361629210545131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6700a1e8a8fb84fba8ce884d54ca1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventIcons:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 21300000, guid: 382dbadcf89f7664aa48e17f3ffa9aa9, type: 3}
+    - Key: 1
+      Value: {fileID: 21300000, guid: 8d1b72da7554e034b863a25b96029563, type: 3}
+    - Key: 2
+      Value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  _eventImage: {fileID: 4538132054178507314}
 --- !u!1 &7517706265776304244
 GameObject:
   m_ObjectHideFlags: 0

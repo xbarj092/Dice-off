@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HUDScreen : MonoBehaviour
 {
+    [SerializeField] private EventUI _event;
     [SerializeField] private List<PlayerHUD> _playerHUD;
 
     private void Start()
@@ -14,12 +15,19 @@ public class HUDScreen : MonoBehaviour
 
     private void OnEnable()
     {
+        GameEvents.OnEventTypeChanged += SetUpEvent;
         GameManager.Instance.OnRoundWon += RoundWon;
     }
 
     private void OnDisable()
     {
+        GameEvents.OnEventTypeChanged -= SetUpEvent;
         GameManager.Instance.OnRoundWon -= RoundWon;
+    }
+
+    private void SetUpEvent(EventType eventType)
+    {
+        _event.SetUpEvent(eventType);
     }
 
     private void SetUpRounds(int count, int index)
