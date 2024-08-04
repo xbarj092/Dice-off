@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f84bec4a9d4092428f078d4824ce73a, type: 3}
   m_Name: TutorialAttackActionText
   m_EditorClassIdentifier: 
-  <Strings>k__BackingField: []
+  <Strings>k__BackingField:
+  - When near opponent, you have the option to attack him by trying to move to his
+    field.
+  - After attacking your opponent, you throw a dice. The resulting number is how
+    much do you decrease your opponents dice value.
